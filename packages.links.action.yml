@@ -1,0 +1,5 @@
+entity.composer_project.add_form:
+  route_name: entity.composer_project.add_form
+  title: 'Add Composer Project'
+  appears_on:
+    - entity.composer_project.collection

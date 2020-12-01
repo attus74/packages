@@ -1,0 +1,50 @@
+entity.composer_project.canonical:
+  path: 'composer/project/{composer_project}'
+  defaults:
+    _entity_view: composer_project
+    _title: 'Composer Project'
+  requirements:
+    _entity_access: composer_project.view
+entity.composer_project.collection:
+  path: composer/project
+  defaults:
+    _entity_list: composer_project
+    _title: 'Composer Project'
+  requirements:
+    _permission: 'administer composer_project'
+  options:
+    _admin_route: 'TRUE'
+entity.composer_project.add_form:
+  path: composer/project/add
+  defaults:
+    _entity_form: composer_project.add
+    _title: 'Add Composer Project'
+  requirements:
+    _entity_create_access: composer_project
+  options:
+    _admin_route: 'TRUE'
+entity.composer_project.edit_form:
+  path: 'composer/project/{composer_project}/edit'
+  defaults:
+    _entity_form: composer_project.edit
+    _title: Edit
+  requirements:
+    _entity_access: composer_project.edit
+  options:
+    _admin_route: 'TRUE'
+entity.composer_project.delete_form:
+  path: 'composer/project/{composer_project}/delete'
+  defaults:
+    _entity_form: composer_project.delete
+    _title: Delete
+  requirements:
+    _entity_access: composer_project.delete
+  options:
+    _admin_route: 'TRUE'
+composer_project.settings:
+  path: admin/structure/composer/project
+  defaults:
+    _form: Drupal\packages\Form\ComposerProjectSettingsForm
+    _title: Settigns
+  requirements:
+    _permission: 'administer composer_project'

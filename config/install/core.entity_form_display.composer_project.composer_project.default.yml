@@ -1,0 +1,29 @@
+status: true
+dependencies:
+  config:
+    - field.field.composer_project.composer_project.project_description
+  module:
+    - packages
+    - text
+id: composer_project.composer_project.default
+targetEntityType: composer_project
+bundle: composer_project
+mode: default
+content:
+  project_description:
+    weight: -18
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  title:
+    type: string_textfield
+    weight: -19
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

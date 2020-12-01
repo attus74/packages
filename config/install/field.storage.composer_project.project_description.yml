@@ -1,0 +1,17 @@
+status: true
+dependencies:
+  module:
+    - packages
+    - text
+id: composer_project.project_description
+field_name: project_description
+entity_type: composer_project
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

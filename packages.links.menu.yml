@@ -1,0 +1,8 @@
+entity.composer_project.collection:
+  title: 'Composer Project'
+  route_name: entity.composer_project.collection
+  parent: system.admin_content
+composer_project.settings:
+  title: 'Composer Project'
+  route_name: composer_project.settings
+  parent: system.admin_structure

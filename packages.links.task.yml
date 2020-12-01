@@ -1,0 +1,20 @@
+entity.composer_project.canonical:
+  route_name: entity.composer_project.canonical
+  base_route: entity.composer_project.canonical
+  weight: -9
+  title: Ansicht
+entity.composer_project.edit_form:
+  route_name: entity.composer_project.edit_form
+  base_route: entity.composer_project.canonical
+  weight: 8
+  title: Bearbeiten
+entity.composer_project.delete_form:
+  route_name: entity.composer_project.delete_form
+  base_route: entity.composer_project.canonical
+  weight: 9
+  title: Löschen
+composer_project.settings:
+  route_name: composer_project.settings
+  base_route: composer_project.settings
+  weight: -9
+  title: Einstellungen

@@ -1,0 +1,11 @@
+'view composer_project':
+  title: 'display Composer Project'
+'edit composer_project':
+  title: 'edit Composer Project'
+'delete composer_project':
+  title: 'delete Composer Project'
+'create composer_project':
+  title: 'create Composer Project'
+'administer composer_project':
+  title: 'administer Composer Project'
+  'restrict access': true

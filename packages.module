@@ -1,0 +1,43 @@
+<?php
+
+/**
+ * Composer Project
+ *
+ * @author Attila Németh
+ * @date 01.12.2020
+ */
+
+/**
+ * Implements hook_theme()
+ */
+function packages_theme()
+{
+  $hooks = [
+    //Composer Project
+    'composer_project' => [
+      'render element' => 'elements',
+      'template' => 'composer-project',
+      'path' => drupal_get_path('module', 'packages') . '/theme',
+    ],
+  ];
+  return $hooks;
+}
+
+function template_preprocess_composer_project(&$variables): void
+{
+  $variables['content'] = $variables['elements'];
+}
+
+/**
+ * Implements hook_locale_translation_projects_alter()
+ */
+function packages_locale_translation_projects_alter(&$projects)
+{
+  $projects['packages'] = [
+    'info' => [
+      'interface translation project' => 'packages',
+      'interface translation server pattern' => drupal_get_path('module', 'packages') . 
+          '/translations/packages.%language.po',
+    ],
+  ];
+}
