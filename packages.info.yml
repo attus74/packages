@@ -1,0 +1,9 @@
+## Packages
+## Attila Németh, UBG
+---
+
+name:  Packages
+description: Composer Packages Repository
+type: module
+core_version_requirement: ^8.9 || ^9
+package: Packages
