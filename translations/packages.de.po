@@ -37,3 +37,6 @@ msgstr "Neues Paket hinzufügen"
 
 msgid "The Package, zipped"
 msgstr "Das Paket, in einer ZIP-Datei"
+
+msgid "The Package is added"
+msgstr "Das Paket wurde hinzugefügt"

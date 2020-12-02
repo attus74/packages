@@ -117,3 +117,9 @@ packages.project.add:
     parameters:
       composer_project:
         type: entity:composer_project
+packages.json:
+  path: packages.json
+  defaults:
+    _controller: Drupal\packages\Controller\Packages::json
+  requirements:
+    _permission: view composer_package

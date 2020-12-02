@@ -36,7 +36,7 @@ use Drupal\packages\ComposerPackageInterface;
  *   fieldable = TRUE,
  *   entity_keys = {
  *     "id" = "id",
- *     "label" = "title",
+ *     "label" = "version",
  *     "uuid" = "uuid",
 
  *   },
