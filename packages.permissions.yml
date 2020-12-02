@@ -6,6 +6,14 @@
   title: 'delete Composer Project'
 'create composer_project':
   title: 'create Composer Project'
-'administer composer_project':
-  title: 'administer Composer Project'
+'administer packages':
+  title: 'Administer Composer'
   'restrict access': true
+'view composer_package':
+  title: 'display Composer Package'
+'edit composer_package':
+  title: 'edit Composer Package'
+'delete composer_package':
+  title: 'delete Composer Package'
+'create composer_package':
+  title: 'create Composer Package'

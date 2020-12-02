@@ -1,0 +1,36 @@
+status: true
+dependencies:
+  config:
+    - field.field.composer_package.composer_package.package_composer
+    - field.field.composer_package.composer_package.package_description
+  module:
+    - packages
+    - text
+id: composer_package.composer_package.default
+targetEntityType: composer_package
+bundle: composer_package
+mode: default
+content:
+  package_composer:
+    weight: 2
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  package_description:
+    type: text_default
+    weight: 1
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  version:
+    label: above
+    type: string
+    weight: 0
+    region: content
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+hidden: {  }

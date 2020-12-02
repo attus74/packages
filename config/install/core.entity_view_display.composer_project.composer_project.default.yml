@@ -11,29 +11,27 @@ bundle: composer_project
 mode: default
 content:
   project_description:
+    type: text_default
     weight: -18
-    settings:
-      rows: 5
-      placeholder: ''
-    third_party_settings: {  }
-    type: text_textarea
     region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
   title:
-    type: string_textfield
+    label: hidden
+    type: string
     weight: -19
     region: content
     settings:
-      size: 60
-      placeholder: ''
+      link_to_entity: false
     third_party_settings: {  }
   project_packages:
     weight: -17
+    label: above
     settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+      view_mode: default
+      link: false
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+    type: entity_reference_entity_view
     region: content
 hidden: {  }

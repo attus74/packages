@@ -11,7 +11,7 @@ entity.composer_project.collection:
     _entity_list: composer_project
     _title: 'Composer Project'
   requirements:
-    _permission: 'administer composer_project'
+    _permission: 'administer packages'
   options:
     _admin_route: 'TRUE'
 entity.composer_project.add_form:
@@ -47,4 +47,73 @@ composer_project.settings:
     _form: Drupal\packages\Form\ComposerProjectSettingsForm
     _title: Settigns
   requirements:
-    _permission: 'administer composer_project'
+    _permission: 'administer packages'
+entity.composer_package.canonical:
+  path: 'composer/package/{composer_package}'
+  defaults:
+    _entity_view: composer_package
+    _title: 'Composer Package'
+  requirements:
+    _entity_access: composer_package.view
+entity.composer_package.collection:
+  path: composer/package
+  defaults:
+    _entity_list: composer_package
+    _title: 'Composer Package'
+  requirements:
+    _permission: 'administer packages'
+  options:
+    _admin_route: 'TRUE'
+entity.composer_package.add_form:
+  path: composer/package/add
+  defaults:
+    _entity_form: composer_package.add
+    _title: 'Add Composer Package'
+  requirements:
+    _entity_create_access: composer_package
+  options:
+    _admin_route: 'TRUE'
+entity.composer_package.edit_form:
+  path: 'composer/package/{composer_package}/edit'
+  defaults:
+    _entity_form: composer_package.edit
+    _title: Bearbeiten
+  requirements:
+    _entity_access: composer_package.edit
+  options:
+    _admin_route: 'TRUE'
+entity.composer_package.delete_form:
+  path: 'composer/package/{composer_package}/delete'
+  defaults:
+    _entity_form: composer_package.delete
+    _title: Löschen
+  requirements:
+    _entity_access: composer_package.delete
+  options:
+    _admin_route: 'TRUE'
+composer_package.settings:
+  path: admin/structure/composer/package
+  defaults:
+    _form: Drupal\packages\Form\ComposerPackageSettingsForm
+    _title: Einstellungen
+  requirements:
+    _permission: 'administer packages'
+packages.settings:
+  path: admin/structure/packages
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'Composer'
+  requirements:
+    _permission: 'administer packages'
+packages.project.add:
+  path: composer/project/{composer_project}/add
+  defaults:
+    _form: Drupal\packages\Form\PackageAddForm
+    _title: Add new package
+  requirements:
+    _entity_access: composer_project.edit
+  options:
+    _admin_route: 'TRUE'
+    parameters:
+      composer_project:
+        type: entity:composer_project

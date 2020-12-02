@@ -13,3 +13,27 @@ msgstr "Composer-Projekt"
 
 msgid "Add Composer Project"
 msgstr "Neues Projekt hinzufügen"
+
+msgid "Composer Package"
+msgstr "Composer-Paket"
+
+msgid "Package"
+msgstr "Paket"
+
+msgid "Packages"
+msgstr "Pakete"
+
+msgid "Composer Packages Settings"
+msgstr "Einstellungen für Composer-Pakete"
+
+msgid "Settings of Packages"
+msgstr "Einstellungen der Pakete"
+
+msgid "Settings of Projects"
+msgstr "Einstellungen der Projekte"
+
+msgid "Add new package"
+msgstr "Neues Paket hinzufügen"
+
+msgid "The Package, zipped"
+msgstr "Das Paket, in einer ZIP-Datei"

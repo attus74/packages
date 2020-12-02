@@ -7,6 +7,7 @@ use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Entity\EntityChangedTrait;
+use Drupal\file\FileInterface;
 use Drupal\user\UserInterface;
 use Drupal\packages\ComposerProjectInterface;
 
@@ -151,5 +152,89 @@ class ComposerProject extends ContentEntityBase implements ComposerProjectInterf
 
     return $fields;
   }
-
+  
+  /**
+   * Possible new versions
+   */
+  public function getNewVersionOptions(): array
+  {
+    
+    opcache_reset();
+    
+    $versions = [];
+    if ($this->get('project_packages')->isEmpty()) {
+      $versions['1.0.0'] = '1.0.0';
+      $versions['1.0-dev'] = '1.0-dev';
+    }
+    else {
+      $existing = [];
+      foreach($this->get('project_packages') as $item) {
+        $v = $item->entity->get('version')->first()->get('value')->getvalue();
+        if (preg_match('/^([0-9]+)\.([0-9]+)(\.|\-)(.*?)$/', $v, $matches)) {
+          $existing[$matches[1]][$matches[2]][$matches[4]] = TRUE;
+        }
+      }
+      ksort($existing);
+      $maxMajor = 0;
+      foreach($existing as $major => $minors) {
+        if ($major > $maxMajor) {
+          $maxMajor  = $major;
+        }
+        $maxMinor = 0;
+        $maxPatch = 0;
+        ksort($minors);
+        foreach($minors as $minor => $patches) {
+          if ($minor > $maxMinor) {
+            $maxMinor = $minor;
+          }
+          foreach(array_keys($patches) as $patch) {
+            if (is_numeric($patch) && $patch > $maxPatch) {
+              $maxPatch = $patch;
+            }
+          }
+        }
+        $versions[$major . '.' . ($maxMinor + 1) . '.0'] = $major . '.' . ($maxMinor + 1) . '.0';
+        $versions[$major . '.' . ($maxMinor) . '-dev'] = $major . '.' . ($maxMinor) . '-dev';
+        $versions[$major . '.' . ($maxMinor) . '-alpha'] = $major . '.' . ($maxMinor) . '-alpha';
+        $versions[$major . '.' . ($maxMinor) . '.' . ($maxPatch + 1)] = $major . '.' . ($maxMinor) . '.' . ($maxPatch + 1);
+        $versions[$major . '.' . ($maxMinor + 1) . '-dev'] = $major . '.' . ($maxMinor + 1) . '-dev';
+        $versions[$major . '.' . ($maxMinor + 1) . '-alpha'] = $major . '.' . ($maxMinor + 1) . '-alpha';
+      }
+      $versions[($maxMajor + 1) . '.0.0'] = ($maxMajor + 1) . '.0.0';
+      $versions[($maxMajor + 1) . '.0-dev'] = ($maxMajor + 1) . '.0-dev';
+      $versions[($maxMajor + 1) . '.0-alpha'] = ($maxMajor + 1) . '.0-alpha';
+    }
+    ksort($versions);
+    return $versions;
+  }
+  
+  /**
+   * {@inheritdoc}
+   */
+  public function addNewPackage(string $version, FileInterface $file, array $description): void
+  {
+    $service = \Drupal::service('packages.manager');
+    $service->unzipFile($file);
+    $service->applyVersion($version);
+    $values = [
+      'version' => $version,
+      'package_description' => $description,
+      'package_composer' => $service->getComposer(),
+    ];
+    $package = \Drupal::entityTypeManager()->getStorage('composer_package')->create($values);
+    $package->save();
+    $file->setPermanent();
+    $file->save();
+    $packages = [];
+    foreach($this->get('project_packages') as $item) {
+      $packages[] = [
+        'entity' => $item->entity,
+      ];
+    }
+    $packages[] = [
+      'entity' => $package,
+    ];
+    $this->set('project_packages', $packages);
+  }
+  
 }

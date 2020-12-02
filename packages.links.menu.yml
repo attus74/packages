@@ -2,7 +2,20 @@ entity.composer_project.collection:
   title: 'Composer Project'
   route_name: entity.composer_project.collection
   parent: system.admin_content
+packages.settings:
+  title: Composer
+  description: Composer Packages Settings
+  route_name: packages.settings
+  parent: system.admin_structure
 composer_project.settings:
   title: 'Composer Project'
+  description: Settings of Projects
   route_name: composer_project.settings
-  parent: system.admin_structure
+  parent: packages.settings
+  weight: -20
+composer_package.settings:
+  title: 'Composer Package'
+  description: Settings of Packages
+  route_name: composer_package.settings
+  parent: packages.settings
+  weight: -19

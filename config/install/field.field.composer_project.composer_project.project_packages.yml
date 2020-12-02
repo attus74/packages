@@ -1,0 +1,20 @@
+status: true
+dependencies:
+  config:
+    - field.storage.composer_project.project_packages
+  module:
+    - packages
+id: composer_project.composer_project.project_packages
+field_name: project_packages
+entity_type: composer_project
+bundle: composer_project
+label: Packages
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:composer_package'
+  handler_settings: {  }
+field_type: entity_reference

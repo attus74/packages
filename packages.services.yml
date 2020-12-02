@@ -1,0 +1,8 @@
+## Services
+## Attila Németh, UBG
+---
+
+services:
+  packages.manager:
+    class: Drupal\packages\PackageManager
+    parent: default_plugin_manager

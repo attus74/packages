@@ -1,0 +1,19 @@
+status: true
+dependencies:
+  config:
+    - field.storage.composer_package.package_description
+  module:
+    - packages
+    - text
+id: composer_package.composer_package.package_description
+field_name: package_description
+entity_type: composer_package
+bundle: composer_package
+label: Description
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

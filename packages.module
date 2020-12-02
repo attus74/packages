@@ -13,6 +13,12 @@
 function packages_theme()
 {
   $hooks = [
+    //Composer Package
+    'composer_package' => [
+      'render element' => 'elements',
+      'template' => 'composer-package',
+      'path' => drupal_get_path('module', 'packages') . '/theme',
+    ],
     //Composer Project
     'composer_project' => [
       'render element' => 'elements',
@@ -40,4 +46,9 @@ function packages_locale_translation_projects_alter(&$projects)
           '/translations/packages.%language.po',
     ],
   ];
+}
+
+function template_preprocess_composer_package(&$variables): void
+{
+  $variables['content'] = $variables['elements'];
 }

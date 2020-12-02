@@ -3,3 +3,8 @@ entity.composer_project.add_form:
   title: 'Add Composer Project'
   appears_on:
     - entity.composer_project.collection
+packages.project.add:
+  route_name: packages.project.add
+  title: Add new Package
+  appears_on:
+    - entity.composer_project.canonical

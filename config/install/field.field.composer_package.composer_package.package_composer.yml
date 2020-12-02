@@ -1,0 +1,18 @@
+status: true
+dependencies:
+  config:
+    - field.storage.composer_package.package_composer
+  module:
+    - packages
+id: composer_package.composer_package.package_composer
+field_name: package_composer
+entity_type: composer_package
+bundle: composer_package
+label: Composer
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long
