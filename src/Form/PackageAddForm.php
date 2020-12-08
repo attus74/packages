@@ -61,7 +61,7 @@ class PackageAddForm extends FormBase {
       '#title' => t('Package'),
       '#description' => t('The Package, zipped'),
       '#upload_validators' => $validators,
-      '#upload_location' => 'public://packages/' . $composer_project->id()  .'/',
+      '#upload_location' => 'temporary://packages/' . $composer_project->id()  .'/' . time() . '/',
       '#required' => TRUE,
     );
     $form['description'] = [

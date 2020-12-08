@@ -216,6 +216,7 @@ class ComposerProject extends ContentEntityBase implements ComposerProjectInterf
     $service = \Drupal::service('packages.manager');
     $service->unzipFile($file);
     $service->applyVersion($version);
+    $service->createZipFile();
     $values = [
       'version' => $version,
       'package_description' => $description,
@@ -223,8 +224,6 @@ class ComposerProject extends ContentEntityBase implements ComposerProjectInterf
     ];
     $package = \Drupal::entityTypeManager()->getStorage('composer_package')->create($values);
     $package->save();
-    $file->setPermanent();
-    $file->save();
     $packages = [];
     foreach($this->get('project_packages') as $item) {
       $packages[] = [
