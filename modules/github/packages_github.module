@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * Github
+ *
+ * @author Attila Németh
+ * 08.12.2020
+ */
+
+use Drupal\Core\Cache\Cache;
+use Drupal\packages\ComposerProjectInterface;
+
+/**
+ * Implements hook_ENTITY_TYPE_update()
+ */
+function packages_github_composer_project_update(ComposerProjectInterface $project): void
+{
+  if ($project->get('project_github')->isEmpty() !== $project->original->get('project_github')->isEmpty()) {
+    Cache::invalidateTags(['block_view']);
+  }
+}

@@ -1,0 +1,15 @@
+## Routing
+---
+
+packages_github.pull:
+  path: composer/project/{composer_project}/github/pull
+  defaults:
+    _controller: Drupal\packages_github\Controller\Github::pull
+    _title: Add new package from Github
+  requirements:
+    _custom_access: Drupal\packages_github\Controller\Github::pullAccess
+  options:
+    _admin_route: 'TRUE'
+    parameters:
+      composer_project:
+        type: entity:composer_project

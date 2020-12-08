@@ -43,3 +43,12 @@ msgstr "Das Paket, in einer ZIP-Datei"
 
 msgid "The Package is added"
 msgstr "Das Paket wurde hinzugefügt"
+
+msgid "Github Plugin for Packages"
+msgstr "Gihub-Plugin zu den Paketen"
+
+msgid "Full name of Github Repository, in vendor/name Format"
+msgstr "Der vollständige Name, in vendor/name-Format"
+
+msgid "Add new package from Github"
+msgstr "Neues Paket von Github hinzufügen"

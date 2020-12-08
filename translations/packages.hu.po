@@ -43,3 +43,12 @@ msgstr "A csomag, egy ZIP-file"
 
 msgid "The Package is added"
 msgstr "A csomag hozzá lett adva"
+
+msgid "Github Plugin for Packages"
+msgstr "Gihub-Plugin a csomagkezelőhöz"
+
+msgid "Full name of Github Repository, in vendor/name Format"
+msgstr "Teljes név, vendor/name-formátumban"
+
+msgid "Add new package from Github"
+msgstr "Új csomag hozzáadása Githubról"

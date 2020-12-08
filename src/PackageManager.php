@@ -173,6 +173,15 @@ class PackageManager {
   }
   
   /**
+   * Set temporary directory, in Drupal schema
+   * @param string $dir
+   */
+  public function setTempDir(string $dir): void
+  {
+    $this->_tempDir = $dir;
+  }
+  
+  /**
    * Temporary Directory in Drupal Schema
    * @return string
    */

@@ -1,0 +1,20 @@
+status: true
+dependencies:
+  module:
+    - packages
+    - packages_github
+id: composer_project.project_github
+field_name: project_github
+entity_type: composer_project
+type: string
+settings:
+  max_length: 128
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

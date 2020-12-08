@@ -19,9 +19,6 @@ class Packages extends ControllerBase {
    */
   public function json(): JsonResponse
   {
-    
-    opcache_reset();
-    
     $packages = [];
     $projects = \Drupal::entityTypeManager()->getStorage('composer_project')->loadMultiple();
     foreach($projects as $project) {

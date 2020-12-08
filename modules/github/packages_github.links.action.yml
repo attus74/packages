@@ -1,0 +1,9 @@
+## Actions
+---
+
+packages_github.pull:
+  route_name: packages_github.pull
+  title: Add new package from Github
+  appears_on:
+    - entity.composer_project.canonical
+  weight: 9

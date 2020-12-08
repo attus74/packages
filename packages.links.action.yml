@@ -8,3 +8,4 @@ packages.project.add:
   title: Add new Package
   appears_on:
     - entity.composer_project.canonical
+  weight: -9
