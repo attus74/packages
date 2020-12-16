@@ -158,9 +158,6 @@ class ComposerProject extends ContentEntityBase implements ComposerProjectInterf
    */
   public function getNewVersionOptions(): array
   {
-    
-    opcache_reset();
-    
     $versions = [];
     if ($this->get('project_packages')->isEmpty()) {
       $versions['1.0.0'] = '1.0.0';
@@ -169,6 +166,7 @@ class ComposerProject extends ContentEntityBase implements ComposerProjectInterf
     else {
       $existing = [];
       foreach($this->get('project_packages') as $item) {
+        $matches = [];
         $v = $item->entity->get('version')->first()->get('value')->getvalue();
         if (preg_match('/^([0-9]+)\.([0-9]+)(\.|\-)(.*?)$/', $v, $matches)) {
           $existing[$matches[1]][$matches[2]][$matches[4]] = TRUE;

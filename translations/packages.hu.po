@@ -52,3 +52,12 @@ msgstr "Teljes név, vendor/name-formátumban"
 
 msgid "Add new package from Github"
 msgstr "Új csomag hozzáadása Githubról"
+
+msgid "Authors"
+msgstr "Szerzők"
+
+msgid "developer"
+msgstr "fejlesztő"
+
+msgid "Requires"
+msgstr "Függőségek"
