@@ -123,3 +123,16 @@ packages.json:
     _controller: Drupal\packages\Controller\Packages::json
   requirements:
     _permission: view composer_package
+packages.home:
+  path: packages/home
+  defaults:
+    _controller: Drupal\packages\Controller\Packages::home
+    _title: Packages
+  requirements:
+    _permission: view composer_package
+packages.home.search:
+  path: packages/home/search/{search}
+  defaults:
+    _controller: Drupal\packages\Controller\Packages::search
+  requirements:
+    _permission: view composer_package

@@ -9,6 +9,7 @@ use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Entity\EntityChangedTrait;
 use Drupal\user\UserInterface;
 use Drupal\packages\ComposerPackageInterface;
+use Drupal\Component\Serialization\Json;
 
 /**
  * Entity Type Composer Package
@@ -151,6 +152,21 @@ class ComposerPackage extends ContentEntityBase implements ComposerPackageInterf
     // You can add additional fields here
 
     return $fields;
+  }
+  
+  /**
+   * Composer Data of this Package
+   * @return array
+   */
+  public function getComposer(): array
+  {
+    if ($this->get('package_composer')->isEmpty()) {
+      return [];
+    }
+    else {
+      $json = $this->get('package_composer')->first()->get('value')->getValue();
+      return Json::decode($json);
+    }
   }
 
 }

@@ -32,6 +32,8 @@ function packages_theme()
 function template_preprocess_composer_project(&$variables): void
 {
   $variables['content'] = $variables['elements'];
+  $variables['attributes']['class'][] = 'composer-project';
+  $variables['attributes']['class'][] = 'composer-project-' . $variables['elements']['#view_mode'];
 }
 
 /**
