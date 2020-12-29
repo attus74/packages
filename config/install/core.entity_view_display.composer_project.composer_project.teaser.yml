@@ -2,7 +2,7 @@ status: true
 dependencies:
   config:
     - field.field.composer_project.composer_project.project_description
-    - field.field.composer_project.composer_project.project_github
+#    - field.field.composer_project.composer_project.project_github
     - field.field.composer_project.composer_project.project_packages
   module:
     - packages
@@ -28,5 +28,5 @@ content:
       link_to_entity: true
     third_party_settings: {  }
 hidden:
-  project_github: true
+#  project_github: true
   project_packages: true
