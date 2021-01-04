@@ -64,7 +64,7 @@ class ComposerFormatter extends FormatterBase {
     }
     if (array_key_exists('require-dev', $data)) {
       foreach($data['require-dev'] as $name => $version) {
-        $requires[] = $name . ': ' . $versio . ' (dev)';
+        $requires[] = $name . ': ' . $version . ' (dev)';
       }
     }
     $build = [
