@@ -144,7 +144,13 @@ class ComposerPackage extends ContentEntityBase implements ComposerPackageInterf
       ->setReadOnly(TRUE);
     $fields['created'] = BaseFieldDefinition::create('created')
       ->setLabel(t('Created'))
-      ->setDescription(t('Create Date'));
+      ->setDescription(t('Create Date'))
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'string',
+        'weight' => -18,
+      ])
+      ->setDisplayConfigurable('view', TRUE);
     $fields['changed'] = BaseFieldDefinition::create('changed')
       ->setLabel(t('Changed'))
       ->setDescription(t('Change Date'));
