@@ -162,7 +162,7 @@ class ComposerProject extends ContentEntityBase implements ComposerProjectInterf
     $versions = [];
     if ($this->get('project_packages')->isEmpty()) {
       $versions['1.0.0'] = '1.0.0';
-      $versions['1.0-dev'] = '1.0-dev';
+//      $versions['1.0-dev'] = '1.0-dev';
     }
     else {
       $existing = [];
@@ -171,6 +171,9 @@ class ComposerProject extends ContentEntityBase implements ComposerProjectInterf
         $v = $item->entity->get('version')->first()->get('value')->getvalue();
         if (preg_match('/^([0-9]+)\.([0-9]+)(\.|\-)(.*?)$/', $v, $matches)) {
           $existing[$matches[1]][$matches[2]][$matches[4]] = TRUE;
+        }
+        elseif (preg_match('/^([0-9]+)\.([0-9]+)$/', $v, $matches)) {
+          $existing[$matches[1]][$matches[2]][0] = TRUE;
         }
       }
       ksort($existing);
@@ -193,15 +196,15 @@ class ComposerProject extends ContentEntityBase implements ComposerProjectInterf
           }
         }
         $versions[$major . '.' . ($maxMinor + 1) . '.0'] = $major . '.' . ($maxMinor + 1) . '.0';
-        $versions[$major . '.' . ($maxMinor) . '-dev'] = $major . '.' . ($maxMinor) . '-dev';
-        $versions[$major . '.' . ($maxMinor) . '-alpha'] = $major . '.' . ($maxMinor) . '-alpha';
+//        $versions[$major . '.' . ($maxMinor) . '-dev'] = $major . '.' . ($maxMinor) . '-dev';
+//        $versions[$major . '.' . ($maxMinor) . '-alpha'] = $major . '.' . ($maxMinor) . '-alpha';
         $versions[$major . '.' . ($maxMinor) . '.' . ($maxPatch + 1)] = $major . '.' . ($maxMinor) . '.' . ($maxPatch + 1);
-        $versions[$major . '.' . ($maxMinor + 1) . '-dev'] = $major . '.' . ($maxMinor + 1) . '-dev';
-        $versions[$major . '.' . ($maxMinor + 1) . '-alpha'] = $major . '.' . ($maxMinor + 1) . '-alpha';
+//        $versions[$major . '.' . ($maxMinor + 1) . '-dev'] = $major . '.' . ($maxMinor + 1) . '-dev';
+//        $versions[$major . '.' . ($maxMinor + 1) . '-alpha'] = $major . '.' . ($maxMinor + 1) . '-alpha';
       }
       $versions[($maxMajor + 1) . '.0.0'] = ($maxMajor + 1) . '.0.0';
-      $versions[($maxMajor + 1) . '.0-dev'] = ($maxMajor + 1) . '.0-dev';
-      $versions[($maxMajor + 1) . '.0-alpha'] = ($maxMajor + 1) . '.0-alpha';
+//      $versions[($maxMajor + 1) . '.0-dev'] = ($maxMajor + 1) . '.0-dev';
+//      $versions[($maxMajor + 1) . '.0-alpha'] = ($maxMajor + 1) . '.0-alpha';
     }
     ksort($versions);
     return $versions;
