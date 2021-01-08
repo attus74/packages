@@ -2,7 +2,7 @@ entity.composer_project.canonical:
   path: 'composer/project/{composer_project}'
   defaults:
     _entity_view: composer_project
-    _title_calback: Drupal\Core\Entity\Controller\EntityController::title
+    _title_callback: Drupal\Core\Entity\Controller\EntityController::title
   requirements:
     _entity_access: composer_project.view
 entity.composer_project.collection:
@@ -45,7 +45,7 @@ composer_project.settings:
   path: admin/structure/composer/project
   defaults:
     _form: Drupal\packages\Form\ComposerProjectSettingsForm
-    _title: Settigns
+    _title: Settings
   requirements:
     _permission: 'administer packages'
 entity.composer_package.canonical:
@@ -121,5 +121,18 @@ packages.json:
   path: packages.json
   defaults:
     _controller: Drupal\packages\Controller\Packages::json
+  requirements:
+    _permission: view composer_package
+packages.home:
+  path: packages/home
+  defaults:
+    _controller: Drupal\packages\Controller\Packages::home
+    _title: Packages
+  requirements:
+    _permission: view composer_package
+packages.home.search:
+  path: packages/home/search/{search}
+  defaults:
+    _controller: Drupal\packages\Controller\Packages::search
   requirements:
     _permission: view composer_package

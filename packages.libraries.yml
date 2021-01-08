@@ -1,0 +1,8 @@
+## Libraries
+---
+
+search:
+  js:
+    js/packages.js: {}
+  dependencies:
+    - core/jquery

@@ -1,0 +1,8 @@
+status: true
+dependencies:
+  module:
+    - packages
+id: composer_project.teaser
+label: Teaser
+targetEntityType: composer_project
+cache: true

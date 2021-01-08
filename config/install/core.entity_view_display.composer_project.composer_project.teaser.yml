@@ -1,0 +1,32 @@
+status: true
+dependencies:
+  config:
+    - field.field.composer_project.composer_project.project_description
+#    - field.field.composer_project.composer_project.project_github
+    - field.field.composer_project.composer_project.project_packages
+  module:
+    - packages
+    - text
+id: composer_project.composer_project.teaser
+targetEntityType: composer_project
+bundle: composer_project
+mode: teaser
+content:
+  project_description:
+    type: text_default
+    weight: -18
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  title:
+    label: hidden
+    type: string
+    weight: -19
+    region: content
+    settings:
+      link_to_entity: true
+    third_party_settings: {  }
+hidden:
+#  project_github: true
+  project_packages: true

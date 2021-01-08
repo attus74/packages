@@ -32,6 +32,8 @@ function packages_theme()
 function template_preprocess_composer_project(&$variables): void
 {
   $variables['content'] = $variables['elements'];
+  $variables['attributes']['class'][] = 'composer-project';
+  $variables['attributes']['class'][] = 'composer-project-' . $variables['elements']['#view_mode'];
 }
 
 /**
@@ -51,4 +53,27 @@ function packages_locale_translation_projects_alter(&$projects)
 function template_preprocess_composer_package(&$variables): void
 {
   $variables['content'] = $variables['elements'];
+  $version = $variables['elements']['#composer_package']->get('version')->first()->get('value')->getValue();
+  $composer = $variables['elements']['#composer_package']->getComposer();
+  $matches = [];
+  if (preg_match('/\-(alpha|beta|dev)$/', $version)) {
+    $version_string = $version;
+  }
+  elseif(preg_match('/^([0-9]+)\.([0-9]+)/', $version, $matches)) {
+    if ($matches[2] == '0') {
+      $version_string = '^' . $matches[1];
+    }
+    else {
+      $version_string = '^' . $matches[1] . '.' . $matches[2];
+    }
+  }
+  else {
+    $version_string = $version;
+  }
+  $variables['content']['composer_string'] = [
+    '#prefix' => '<p class="composer">',
+    '#suffix' => '</p>',
+    '#markup' => 'composer require ' . $composer['name'] . ':' . $version_string,
+    '#weight' => -39,
+  ];
 }

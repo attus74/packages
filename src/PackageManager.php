@@ -46,7 +46,6 @@ class PackageManager {
     else {
       throw new PackageZipException(t('Package may not be unzipped'));
     }
-    $this->_distUrl = file_create_url($file->getFileUri());
   }
   
   public function pullUbg(): void
@@ -55,6 +54,56 @@ class PackageManager {
     
   }
   
+  /**
+   * Create and save a ZIP File
+   */
+  public function createZipFile(): void
+  {
+    $zipFileName = str_replace(['/', '-', '.'], '_', $this->_composerJson['name'] . '/' . $this->_version) . '.zip';
+    $zipDir = 'temporary://packages/zip/' . time();
+    \Drupal::service('file_system')
+            ->prepareDirectory($zipDir, FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS);
+    $zipUri = \Drupal::service('file_system')->realpath($zipDir . '/' . $zipFileName);
+    $zip = new \ZipArchive; 
+    $dir = $this->_getRealTempDir();
+    if ($zip ->open($zipUri, \ZipArchive::CREATE ) === TRUE) {
+      $this->_addFolderToZip($zip, $dir);
+      $zip->close(); 
+    }
+    $fileDir = 'public://packages/' . date('Y')  . '/' . date('md');
+    \Drupal::service('file_system')
+            ->prepareDirectory($fileDir, FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS);
+    $uri = \Drupal::service('file_system')->copy($zipUri, $fileDir, FileSystemInterface::EXISTS_RENAME);
+    $values = [
+      'filename' => $zipFileName,
+      'uri' => $uri,
+    ];
+    $file = \Drupal::entityTypeManager()->getStorage('file')->create($values);
+    $file->setPermanent();
+    $file->save();
+    $this->_distUrl = file_create_url($uri);
+  }
+  
+  /**
+   * Add the content of a subfolder to the ZIP file
+   * @param \Ziparchive $zip
+   * @param string $path
+   */
+  private function _addFolderToZip(\Ziparchive $zip, string $path): void
+  {
+    $handle = opendir($path);
+    $localdir = str_replace($this->_getRealTempDir(), '', $path);
+    while (false !== ($entry = readdir($handle))) {
+      if (is_file($path . '/' . $entry)) {
+        $zip->addFile($path . '/' . $entry, $localdir . '/' . $entry);
+      }
+      if (!preg_match('/^\./', $entry) && is_dir($path . '/' . $entry)) {
+        $this->_addFolderToZip($zip, $path . '/' . $entry);
+      }
+    } 
+  }
+
+
   /**
    * Add/replace version number in composer.json and info.yml files
    * @param string $version
@@ -127,6 +176,15 @@ class PackageManager {
       $this->_composerJson = $content;
     }
     file_put_contents($uri, Json::encode($content));
+  }
+  
+  /**
+   * Set temporary directory, in Drupal schema
+   * @param string $dir
+   */
+  public function setTempDir(string $dir): void
+  {
+    $this->_tempDir = $dir;
   }
   
   /**

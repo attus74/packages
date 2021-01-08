@@ -1,0 +1,18 @@
+status: true
+dependencies:
+  config:
+    - field.storage.composer_project.project_github
+  module:
+    - packages
+id: composer_project.composer_project.project_github
+field_name: project_github
+entity_type: composer_project
+bundle: composer_project
+label: Github Repository
+description: 'Full name of Github Repository, in vendor/name Format'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

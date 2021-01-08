@@ -2,4 +2,4 @@ name: 'Composer Project'
 description: Composer Repository
 type: module
 core_version_requirement: ^8.9 || ^9
-package: Composer Packages
+package: Packages
