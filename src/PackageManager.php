@@ -49,6 +49,12 @@ class PackageManager {
     $this->_distUrl = file_create_url($file->getFileUri());
   }
   
+  public function pullUbg(): void
+  {
+    $tempPath = $this->_getRealTempDir();
+    
+  }
+  
   /**
    * Add/replace version number in composer.json and info.yml files
    * @param string $version

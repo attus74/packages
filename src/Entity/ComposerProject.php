@@ -7,6 +7,7 @@ use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Entity\EntityChangedTrait;
+use Drupal\Core\Cache\Cache;
 use Drupal\file\FileInterface;
 use Drupal\user\UserInterface;
 use Drupal\packages\ComposerProjectInterface;
@@ -235,6 +236,15 @@ class ComposerProject extends ContentEntityBase implements ComposerProjectInterf
       'entity' => $package,
     ];
     $this->set('project_packages', $packages);
+  }
+  
+  /**
+   * {@inheritdoc}
+   */
+  public function postSave(EntityStorageInterface $storage, $update = TRUE)
+  {
+    Cache::invalidateTags(['block_view']);
+    return parent::postSave($storage, $update);
   }
   
 }

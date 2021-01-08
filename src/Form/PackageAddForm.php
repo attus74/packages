@@ -14,6 +14,8 @@ use Drupal\packages\ComposerProjectInterface;
  */
 class PackageAddForm extends FormBase {
   
+  protected   $_version;
+  
   /**
    * {@inheritdoc}
    */
@@ -27,9 +29,6 @@ class PackageAddForm extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state, ComposerProjectInterface $composer_project = NULL)
   {
-    
-    opcache_reset();
-    
     $form_state->set('project', $composer_project);
     $options = $composer_project->getNewVersionOptions();
     $options['other'] = t('Other');
@@ -81,21 +80,30 @@ class PackageAddForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state)
   {
-    if ($form_state->getValue('version') === 'other') {
-      $version = $form_state->getValue('other');
-    }
-    else {
-      $version = $form_state->getValue('version');
-    }
+    $this->_setVersion($form_state);
     $zipFileId = $form_state->getValue(['zip', 0]);
     $zipFile = \Drupal::entityTypeManager()->getStorage('file')->load($zipFileId);
     $description = $form_state->getValue('description');
-    $form_state->get('project')->addnewPackage($version, $zipFile, $description);
+    $form_state->get('project')->addnewPackage($this->_version, $zipFile, $description);
     $form_state->get('project')->save();
     \Drupal::messenger()->addStatus(t('The Package is added'));
     $form_state->setRedirect('entity.composer_project.canonical', [
       'composer_project' => $form_state->get('project')->id(),
     ]);
+  }
+  
+  /**
+   * Projekt-Version
+   * @param FormStateInterface $form_state
+   */
+  protected function _setVersion(FormStateInterface $form_state): void
+  {
+    if ($form_state->getValue('version') === 'other') {
+      $this->_version = $form_state->getValue('other');
+    }
+    else {
+      $this->_version = $form_state->getValue('version');
+    }
   }
   
 }
