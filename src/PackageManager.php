@@ -169,7 +169,7 @@ class PackageManager {
     if (is_null($this->_composerJson)) {
       $this->_composerJson = $content;
     }
-    file_put_contents($uri, Json::encode($content));
+    file_put_contents($uri, json_encode($content, JSON_PRETTY_PRINT));
   }
   
   /**
