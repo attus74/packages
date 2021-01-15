@@ -32,7 +32,7 @@ msgstr "Einstellungen der Pakete"
 msgid "Settings of Projects"
 msgstr "Einstellungen der Projekte"
 
-msgid "Add new package"
+msgid "Add new Package"
 msgstr "Neues Paket hinzufügen"
 
 msgid "Add new Package"

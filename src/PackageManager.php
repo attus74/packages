@@ -60,7 +60,7 @@ class PackageManager {
     $zipUri = \Drupal::service('file_system')->realpath($zipDir . '/' . $zipFileName);
     $zip = new \ZipArchive; 
     $dir = $this->_getRealTempDir();
-    if ($zip ->open($zipUri, \ZipArchive::CREATE ) === TRUE) {
+    if ($zip->open($zipUri, \ZipArchive::CREATE ) === TRUE) {
       $this->_addFolderToZip($zip, $dir);
       $zip->close(); 
     }
@@ -198,7 +198,7 @@ class PackageManager {
    * Absolute Path of Temporary Directory
    * @return string
    */
-  private function _getRealTempDir(): string
+  protected function _getRealTempDir(): string
   {
     $dir = $this->_getTempDir();
     $result = \Drupal::service('file_system')
