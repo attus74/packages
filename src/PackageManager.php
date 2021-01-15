@@ -86,7 +86,7 @@ class PackageManager {
   private function _addFolderToZip(\Ziparchive $zip, string $path): void
   {
     $handle = opendir($path);
-    $localdir = str_replace($this->_getRealTempDir(), '', $path);
+    $localdir = preg_replace('#^\/#', '', str_replace($this->_getRealTempDir(), '', $path));
     while (false !== ($entry = readdir($handle))) {
       if (is_file($path . '/' . $entry)) {
         $zip->addFile($path . '/' . $entry, $localdir . '/' . $entry);
