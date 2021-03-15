@@ -203,8 +203,21 @@ class PackageManager {
     $dir = $this->_getTempDir();
     $result = \Drupal::service('file_system')
             ->prepareDirectory($dir, FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS);
-    $real = \Drupal::service('file_system')->realpath($dir);
-    return $real;
+    if ($result) {
+      $real = \Drupal::service('file_system')->realpath($dir);
+      return $real;
+    }
+    else {
+      throw new \Exception('Das temporäre Verzeichnis ' . $dir . ' kann nicht erstellt werden');
+    }
+  }
+  
+  public function addExtra(string $key, $value): void
+  {
+    if (!array_key_exists('extra', $this->_composerJson)) {
+      $this->_composerJson['extra'] = [];
+    }
+    $this->_composerJson['extra'][$key] = $value;
   }
   
 }

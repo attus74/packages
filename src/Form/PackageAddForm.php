@@ -38,6 +38,7 @@ class PackageAddForm extends FormBase {
       '#required' => TRUE,
       '#empty option' => t('Please Select'),
       '#options' => $options,
+      '#weight' => -9,
     ];
     $form['other'] = [
       '#type' => 'textfield',
