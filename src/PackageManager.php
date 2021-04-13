@@ -91,7 +91,7 @@ class PackageManager {
       if (is_file($path . '/' . $entry)) {
         $zip->addFile($path . '/' . $entry, $localdir . '/' . $entry);
       }
-      if (!preg_match('/^\./', $entry) && is_dir($path . '/' . $entry)) {
+      if ($entry != '.' && $entry != '..' && is_dir($path . '/' . $entry)) {
         $this->_addFolderToZip($zip, $path . '/' . $entry);
       }
     } 
