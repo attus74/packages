@@ -38,6 +38,7 @@ class ComposerFormatter extends FormatterBase {
    */
   public function viewElements(FieldItemListInterface $items, $langcode)
   {
+    opcache_reset();
     $elements = [];
     foreach($items as $item) {
       $json = $item->get('value')->getValue();
@@ -49,9 +50,45 @@ class ComposerFormatter extends FormatterBase {
       if (array_key_exists('require', $data) || array_key_exists('require-dev', $data)) {
         $version['require'] = $this->_formatRequire($data);
       }
+      if (array_key_exists('extra', $data)) {
+        $version['extra'] = $this->_formatExtra($data);
+      }
       $elements[] = $version;
     }
     return $elements;
+  }
+  
+  private function _formatExtra(array $data): array
+  {
+    $build = [
+      '#prefix' => '<div class="composer-extra">',
+      '#suffix' => '</div>',
+    ];
+    if (array_key_exists('ubg_stability', $data['extra'])) {
+      $label = t('Stability');
+      switch($data['extra']['ubg_stability']) {
+        case 'stable':
+          $value = t('Live');
+          $color = 'green';
+          break;
+        case 'alpha':
+          $value = t('160');
+          $color = 'yellow';
+          break;
+        case 'dev':
+          $value = t('Development');
+          $color = 'blue';
+          break;
+        default:
+          $value = $data['extra']['ubg_stability'];
+          $color = 'red';
+      }
+      $build[] = [
+        '#theme' => 'image',
+        '#uri' => 'https://img.shields.io/badge/' . $label . '-' . $value . '-' . $color,
+      ];
+    }
+    return $build;
   }
   
   private function _formatRequire($data): array

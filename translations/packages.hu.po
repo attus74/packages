@@ -61,3 +61,15 @@ msgstr "fejlesztő"
 
 msgid "Requires"
 msgstr "Függőségek"
+
+msgid "Stability"
+msgstr "Stabilitás"
+
+msgid "Live"
+msgstr "Live"
+
+msgid "160"
+msgstr "160"
+
+msgid "Development"
+msgstr "Fejlesztői"

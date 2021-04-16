@@ -61,3 +61,15 @@ msgstr "Entwickler"
 
 msgid "Requires"
 msgstr "Abhängigkeiten"
+
+msgid "Stability"
+msgstr "Stabilität"
+
+msgid "Live"
+msgstr "Live"
+
+msgid "160"
+msgstr "160er"
+
+msgid "Development"
+msgstr "Entwicklung"
