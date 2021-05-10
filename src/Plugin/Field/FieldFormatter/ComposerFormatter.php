@@ -38,9 +38,6 @@ class ComposerFormatter extends FormatterBase {
    */
   public function viewElements(FieldItemListInterface $items, $langcode)
   {
-    
-    opcache_reset();
-    
     $elements = [];
     foreach($items as $item) {
       $json = $item->get('value')->getValue();
@@ -65,9 +62,6 @@ class ComposerFormatter extends FormatterBase {
   
   private function _formatLinks(array $data): array
   {
-    
-    opcache_reset();
-    
     $links = [];
     if (array_key_exists('homepage', $data)) {
       $url = Url::fromUri($data['homepage'], [
