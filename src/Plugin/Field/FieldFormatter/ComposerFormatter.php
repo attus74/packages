@@ -38,7 +38,9 @@ class ComposerFormatter extends FormatterBase {
    */
   public function viewElements(FieldItemListInterface $items, $langcode)
   {
+    
     opcache_reset();
+    
     $elements = [];
     foreach($items as $item) {
       $json = $item->get('value')->getValue();
@@ -46,6 +48,9 @@ class ComposerFormatter extends FormatterBase {
       $version = [];
       if (array_key_exists('authors', $data)) {
         $version['authors'] = $this->_formatAuthors($data);
+      }
+      if (array_key_exists('homepage', $data)) {
+        $version['links'] = $this->_formatLinks($data);
       }
       if (array_key_exists('require', $data) || array_key_exists('require-dev', $data)) {
         $version['require'] = $this->_formatRequire($data);
@@ -56,6 +61,37 @@ class ComposerFormatter extends FormatterBase {
       $elements[] = $version;
     }
     return $elements;
+  }
+  
+  private function _formatLinks(array $data): array
+  {
+    
+    opcache_reset();
+    
+    $links = [];
+    if (array_key_exists('homepage', $data)) {
+      $url = Url::fromUri($data['homepage'], [
+        'attributes' => [
+          'target' => '_blank',
+        ],
+      ]);
+      $links[] = Link::fromTextAndUrl(t('Homepage'), $url)->toString();
+      if (array_key_exists('readme', $data)) {
+        $url = Url::fromUri($data['homepage'] . '/' . $data['readme'], [
+          'attributes' => [
+            'target' => '_blank',
+          ],
+        ]);
+        $links[] = Link::fromTextAndUrl(t('Readme'), $url)->toString();
+      }
+    }
+    $build = [
+      '#theme' => 'item_list',
+      '#title' => t('Links'),
+      '#items' => $links,
+      '#weight' => +99,
+    ];
+    return $build;
   }
   
   private function _formatExtra(array $data): array
